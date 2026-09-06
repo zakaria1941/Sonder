@@ -1,0 +1,435 @@
+/* ============================================================
+   Primitives: buttons, chips, art, covers, the Signal
+   ============================================================ */
+
+/* ---------------- Signal ---------------- */
+
+.signal {
+  width: 100%;
+  position: relative;
+  pointer-events: none;
+}
+
+.signal canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ---------------- Buttons ---------------- */
+
+.btn {
+  --btn-h: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  height: var(--btn-h);
+  padding-inline: var(--s-5);
+  border-radius: var(--r-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  position: relative;
+  isolation: isolate;
+  transition:
+    background-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease-out),
+    box-shadow var(--t-base) var(--ease);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--sm {
+  --btn-h: 34px;
+  padding-inline: var(--s-3);
+  font-size: var(--fs-xs);
+}
+
+.btn--lg {
+  --btn-h: 54px;
+  padding-inline: var(--s-8);
+  font-size: 1rem;
+}
+
+.btn--full {
+  width: 100%;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--ink-000);
+  box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+}
+
+.btn--primary:hover {
+  background: color-mix(in srgb, var(--accent) 88%, white);
+  box-shadow: 0 10px 34px -12px rgba(var(--accent-rgb), 0.85);
+}
+
+.btn--outline {
+  border: 1px solid var(--line-strong);
+  color: var(--bone);
+  background: rgba(239, 235, 227, 0.02);
+}
+
+.btn--outline:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--bone);
+}
+
+.btn--ghost {
+  color: var(--bone-dim);
+  padding-inline: var(--s-3);
+}
+
+.btn--ghost:hover {
+  color: var(--bone);
+  background: rgba(239, 235, 227, 0.06);
+}
+
+.btn--quiet {
+  color: var(--ash);
+  padding-inline: 0;
+  height: auto;
+}
+
+.btn--quiet:hover {
+  color: var(--accent);
+}
+
+.btn--icon {
+  width: var(--btn-h);
+  padding: 0;
+  color: var(--bone-dim);
+  border-radius: var(--r-sm);
+}
+
+.btn--icon:hover {
+  color: var(--bone);
+  background: rgba(239, 235, 227, 0.07);
+}
+
+.btn__trail {
+  transition: transform var(--t-base) var(--ease-out);
+}
+
+.btn:hover .btn__trail {
+  transform: translateX(3px);
+}
+
+/* ---------------- Chips ---------------- */
+
+.chip {
+  --chip-hue: var(--accent);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 9px var(--s-4);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: rgba(239, 235, 227, 0.015);
+  color: var(--bone-dim);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition:
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease-out);
+}
+
+.chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 160% at 0% 100%, var(--chip-hue) 0%, transparent 62%);
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease);
+}
+
+.chip:hover {
+  color: var(--bone);
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.chip:hover::before {
+  opacity: 0.1;
+}
+
+.chip.is-selected {
+  color: var(--ink-000);
+  background: var(--chip-hue);
+  border-color: var(--chip-hue);
+  font-weight: 600;
+}
+
+.chip.is-selected::before {
+  opacity: 0;
+}
+
+.chip--sm {
+  padding: 5px var(--s-3);
+  font-size: var(--fs-xs);
+  border-radius: var(--r-xs);
+}
+
+.chip__label {
+  position: relative;
+  z-index: 1;
+}
+
+.chip__hint {
+  position: relative;
+  z-index: 1;
+  font-size: var(--fs-xs);
+  color: var(--ash);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+.chip.is-selected .chip__hint {
+  color: rgba(4, 5, 10, 0.66);
+}
+
+/* ---------------- Art + Cover ---------------- */
+
+.art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--ink-200);
+}
+
+.cover {
+  --cover-hue: var(--accent);
+  --cover-grade: 0.72;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ink-200);
+  /* Contains the luminosity blend below. The generated art layer — not this
+     background — is what the photo blends against, because isolate keeps the
+     element's own background outside the blend group. */
+  isolation: isolate;
+}
+
+.cover__base {
+  position: absolute;
+  inset: 0;
+}
+
+.cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Photo supplies luminance; the mood hue underneath supplies the colour. */
+  filter: grayscale(1) contrast(1.14) brightness(calc(1.16 - var(--cover-grade) * 0.4));
+  mix-blend-mode: luminosity;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 900ms var(--ease-out),
+    transform 1400ms var(--ease-out);
+}
+
+.cover.is-ready .cover__img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cover__wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(4, 5, 10, 0.44) 0%, rgba(4, 5, 10, 0.02) 50%, rgba(4, 5, 10, 0.2) 100%);
+}
+
+.cover--scrim::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(4, 5, 10, 0.94) 4%, rgba(4, 5, 10, 0.28) 46%, transparent 78%);
+}
+
+/* ---------------- Equalizer ---------------- */
+
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 13px;
+  width: 14px;
+}
+
+.eq i {
+  width: 2.5px;
+  border-radius: 1px;
+  background: var(--accent);
+  height: 30%;
+}
+
+.eq.is-playing i {
+  animation: eq-bounce 900ms var(--ease-in-out) infinite alternate;
+}
+
+.eq.is-playing i:nth-child(2) {
+  animation-duration: 640ms;
+  animation-delay: 120ms;
+}
+
+.eq.is-playing i:nth-child(3) {
+  animation-duration: 1080ms;
+  animation-delay: 60ms;
+}
+
+@keyframes eq-bounce {
+  from {
+    height: 22%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+/* ---------------- Reveal ---------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 760ms var(--ease-out),
+    transform 760ms var(--ease-out);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------- Empty state ---------------- */
+
+.empty {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--s-4);
+  padding: clamp(48px, 9vw, 96px) var(--s-6);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-lg);
+  background: radial-gradient(90% 120% at 50% 0%, var(--accent-soft) 0%, transparent 60%), rgba(239, 235, 227, 0.012);
+}
+
+.empty__mark {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
+}
+
+.empty .lede {
+  max-width: 40ch;
+}
+
+/* ---------------- Logo ---------------- */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--bone);
+}
+
+.logo__mark {
+  width: 26px;
+  height: 26px;
+  color: var(--accent);
+  flex: none;
+}
+
+.logo__word {
+  font-family: var(--font-display);
+  font-variation-settings:
+    'wdth' 118,
+    'wght' 700;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ---------------- Metric ---------------- */
+
+.metric {
+  display: grid;
+  gap: 3px;
+  padding-block: var(--s-2);
+}
+
+.metric__value {
+  font-variation-settings:
+    'wdth' 108,
+    'wght' 620;
+}
+
+.metric__label {
+  color: var(--ash);
+}
+
+.metric__hint {
+  font-size: var(--fs-xs);
+  color: var(--ash-dim);
+}
+
+/* ---------------- Scroll rail ---------------- */
+
+.rail {
+  display: flex;
+  gap: var(--s-4);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  /* Without this the first snap target sits at the padding edge and the
+     rail silently self-scrolls by one gutter on load. */
+  scroll-padding-inline: var(--gutter);
+  padding-bottom: var(--s-2);
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+}
+
+.rail > * {
+  scroll-snap-align: start;
+  flex: none;
+}
+
+/* Real album art slots into exactly the box the generated sleeve occupies. */
+.trackart {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--ink-200);
+}

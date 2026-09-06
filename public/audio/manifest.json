@@ -1,0 +1,194 @@
+[
+  {
+    "slug": "drift",
+    "title": "Drift",
+    "duration": 52,
+    "bpm": 62,
+    "energy": 12,
+    "valence": 30
+  },
+  {
+    "slug": "long-exhale",
+    "title": "Long Exhale",
+    "duration": 56,
+    "bpm": 58,
+    "energy": 15,
+    "valence": 42
+  },
+  {
+    "slug": "undertow",
+    "title": "Undertow",
+    "duration": 54,
+    "bpm": 68,
+    "energy": 24,
+    "valence": 16
+  },
+  {
+    "slug": "rainfall-window",
+    "title": "Rainfall Window",
+    "duration": 58,
+    "bpm": 66,
+    "energy": 26,
+    "valence": 28
+  },
+  {
+    "slug": "paper-boats",
+    "title": "Paper Boats",
+    "duration": 52,
+    "bpm": 72,
+    "energy": 30,
+    "valence": 46
+  },
+  {
+    "slug": "ember",
+    "title": "Ember",
+    "duration": 54,
+    "bpm": 74,
+    "energy": 32,
+    "valence": 58
+  },
+  {
+    "slug": "slow-tide",
+    "title": "Slow Tide",
+    "duration": 60,
+    "bpm": 70,
+    "energy": 35,
+    "valence": 34
+  },
+  {
+    "slug": "quiet-hours",
+    "title": "Quiet Hours",
+    "duration": 56,
+    "bpm": 76,
+    "energy": 38,
+    "valence": 50
+  },
+  {
+    "slug": "lantern",
+    "title": "Lantern",
+    "duration": 50,
+    "bpm": 84,
+    "energy": 44,
+    "valence": 74
+  },
+  {
+    "slug": "second-coffee",
+    "title": "Second Coffee",
+    "duration": 52,
+    "bpm": 88,
+    "energy": 48,
+    "valence": 68
+  },
+  {
+    "slug": "meridian",
+    "title": "Meridian",
+    "duration": 58,
+    "bpm": 92,
+    "energy": 54,
+    "valence": 40
+  },
+  {
+    "slug": "glasswork",
+    "title": "Glasswork",
+    "duration": 54,
+    "bpm": 96,
+    "energy": 50,
+    "valence": 54
+  },
+  {
+    "slug": "afterglow",
+    "title": "Afterglow",
+    "duration": 54,
+    "bpm": 98,
+    "energy": 60,
+    "valence": 64
+  },
+  {
+    "slug": "golden-hour",
+    "title": "Golden Hour",
+    "duration": 52,
+    "bpm": 100,
+    "energy": 63,
+    "valence": 78
+  },
+  {
+    "slug": "night-errand",
+    "title": "Night Errand",
+    "duration": 56,
+    "bpm": 104,
+    "energy": 66,
+    "valence": 44
+  },
+  {
+    "slug": "neon-rain",
+    "title": "Neon Rain",
+    "duration": 58,
+    "bpm": 108,
+    "energy": 70,
+    "valence": 38
+  },
+  {
+    "slug": "pulse",
+    "title": "Pulse",
+    "duration": 56,
+    "bpm": 112,
+    "energy": 74,
+    "valence": 48
+  },
+  {
+    "slug": "coast-road",
+    "title": "Coast Road",
+    "duration": 54,
+    "bpm": 116,
+    "energy": 78,
+    "valence": 72
+  },
+  {
+    "slug": "neon",
+    "title": "Neon",
+    "duration": 52,
+    "bpm": 120,
+    "energy": 82,
+    "valence": 70
+  },
+  {
+    "slug": "overpass",
+    "title": "Overpass",
+    "duration": 54,
+    "bpm": 124,
+    "energy": 86,
+    "valence": 52
+  },
+  {
+    "slug": "kinetic",
+    "title": "Kinetic",
+    "duration": 50,
+    "bpm": 128,
+    "energy": 90,
+    "valence": 54
+  },
+  {
+    "slug": "ignition",
+    "title": "Ignition",
+    "duration": 50,
+    "bpm": 132,
+    "energy": 93,
+    "valence": 60
+  },
+  {
+    "slug": "redline",
+    "title": "Redline",
+    "duration": 48,
+    "bpm": 140,
+    "energy": 96,
+    "valence": 50
+  },
+  {
+    "slug": "afterburn",
+    "title": "Afterburn",
+    "duration": 46,
+    "bpm": 146,
+    "energy": 99,
+    "valence": 44
+  }
+]

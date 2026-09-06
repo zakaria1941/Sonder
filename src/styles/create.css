@@ -1,0 +1,441 @@
+/* ============================================================
+   Create: live moment panel, steps, generation takeover
+   ============================================================ */
+
+.create {
+  padding-top: var(--s-12);
+}
+
+.create__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 348px;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+/* ---------------- Live moment ---------------- */
+
+.moment {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--s-5));
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.moment__inner {
+  display: grid;
+  gap: var(--s-4);
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: radial-gradient(120% 90% at 0% 0%, var(--accent-soft) 0%, transparent 58%), var(--ink-100);
+  transition: border-color var(--t-slow) var(--ease);
+}
+
+.moment__title {
+  line-height: 1;
+}
+
+.moment__and {
+  display: block;
+  font-size: 0.52em;
+  color: var(--ash);
+  font-variation-settings:
+    'wdth' 105,
+    'wght' 500;
+  letter-spacing: -0.01em;
+  margin-top: 6px;
+}
+
+.moment__blurb {
+  font-size: var(--fs-sm);
+  color: var(--bone-dim);
+  margin-top: -6px;
+}
+
+.moment__signal {
+  margin-inline: calc(var(--s-2) * -1);
+}
+
+.moment__facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line-faint);
+  border: 1px solid var(--line-faint);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+.moment__facts > div {
+  background: var(--ink-200);
+  padding: 9px var(--s-3);
+  display: grid;
+  gap: 2px;
+}
+
+.moment__facts dt {
+  color: var(--ash-dim);
+}
+
+.moment__facts dd {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bone);
+}
+
+.moment__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.moment__progress {
+  display: flex;
+  gap: 4px;
+}
+
+.moment__progress span {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(239, 235, 227, 0.12);
+  transition: background-color var(--t-base) var(--ease);
+}
+
+.moment__progress span.is-on {
+  background: var(--accent);
+}
+
+.moment__hint {
+  font-size: var(--fs-xs);
+  color: var(--ash-dim);
+  text-align: center;
+  margin-top: -6px;
+}
+
+/* ---------------- Steps ---------------- */
+
+.create__steps {
+  display: grid;
+  gap: clamp(40px, 6vw, 72px);
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.create__head {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.cstep {
+  display: grid;
+  gap: var(--s-5);
+  padding-top: var(--s-6);
+  border-top: 1px solid var(--line);
+}
+
+.cstep__head {
+  display: grid;
+  gap: 4px;
+}
+
+.cstep__hint {
+  font-size: var(--fs-sm);
+  color: var(--ash);
+}
+
+.prefs {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.prefs__block {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.prefs__label {
+  color: var(--ash-dim);
+}
+
+.prefs__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-6);
+}
+
+.prefs__energyhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.prefs__energyval {
+  color: var(--accent);
+  font-size: var(--fs-sm);
+}
+
+.prefs__scale {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ash-dim);
+}
+
+.energyslider {
+  --fill: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--fill),
+    rgba(239, 235, 227, 0.13) var(--fill),
+    rgba(239, 235, 227, 0.13) 100%
+  );
+  cursor: pointer;
+}
+
+.energyslider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bone);
+  border: 3px solid var(--ink-050);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 4px 14px rgba(0, 0, 0, 0.6);
+}
+
+.energyslider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bone);
+  border: 3px solid var(--ink-050);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* ---------------- Free text ---------------- */
+
+.notefield {
+  position: relative;
+}
+
+.notefield textarea {
+  width: 100%;
+  padding: var(--s-5) var(--s-5) var(--s-8);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--ink-100);
+  color: var(--bone);
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 132px;
+  transition:
+    border-color var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease);
+}
+
+.notefield textarea::placeholder {
+  color: var(--ash-dim);
+}
+
+.notefield textarea:focus {
+  outline: none;
+  border-color: var(--accent-line);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.09);
+}
+
+.notefield__count {
+  position: absolute;
+  right: var(--s-4);
+  bottom: var(--s-3);
+  color: var(--ash-dim);
+}
+
+.notefield__examples {
+  display: grid;
+  gap: 4px;
+  margin-top: var(--s-3);
+}
+
+.notefield__example {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  color: var(--ash);
+  font-size: var(--fs-sm);
+  text-align: left;
+  transition:
+    color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.notefield__example:hover {
+  color: var(--bone);
+  background: rgba(239, 235, 227, 0.045);
+}
+
+.notefield__example svg {
+  color: var(--accent);
+  flex: none;
+}
+
+.create__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--s-6);
+  padding-block: var(--s-8) var(--s-16);
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-8);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1080px) {
+  .create__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .moment {
+    position: static;
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .create__steps {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  /* The sticky panel carries its own primary action once it sits inline. */
+  .create__foot {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .prefs__row {
+    grid-template-columns: 1fr;
+    gap: var(--s-5);
+  }
+  .create__foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-3);
+    text-align: center;
+  }
+  .moment__inner {
+    padding: var(--s-4);
+  }
+}
+
+/* ---------------- Generation takeover ---------------- */
+
+.generating {
+  position: fixed;
+  inset: 0;
+  z-index: 980;
+  display: grid;
+  place-items: center;
+  background: var(--ink-000);
+  overflow: hidden;
+}
+
+.generating::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(70% 60% at 50% 50%, var(--accent-soft) 0%, transparent 68%);
+  animation: breathe 4s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes breathe {
+  from {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.generating__inner {
+  position: relative;
+  width: min(680px, 92vw);
+  display: grid;
+  gap: var(--s-8);
+  justify-items: center;
+  text-align: center;
+}
+
+.generating__stages {
+  display: grid;
+  gap: var(--s-3);
+  justify-items: start;
+}
+
+.generating__stage {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--font-display);
+  font-variation-settings:
+    'wdth' 110,
+    'wght' 560;
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  letter-spacing: -0.02em;
+  color: var(--ash-dim);
+  opacity: 0.4;
+  transform: translateY(2px);
+  transition:
+    color var(--t-slow) var(--ease),
+    opacity var(--t-slow) var(--ease),
+    transform var(--t-slow) var(--ease-out);
+}
+
+.generating__stage.is-active {
+  color: var(--bone);
+  opacity: 1;
+  transform: none;
+}
+
+.generating__stage.is-done {
+  color: var(--ash);
+  opacity: 0.72;
+}
+
+.generating__dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  transition: background-color var(--t-base) var(--ease);
+}
+
+.generating__stage.is-active .generating__dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.9);
+}
+
+.generating__stage.is-done .generating__dot {
+  background: var(--ash-dim);
+  border-color: var(--ash-dim);
+}
+
+.generating__note {
+  color: var(--ash-dim);
+}
+
+.generating {
+  animation: fade 340ms var(--ease);
+}

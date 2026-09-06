@@ -1,0 +1,638 @@
+/* ============================================================
+   Player: desktop bar, mobile mini, full-screen sheet
+   ============================================================ */
+
+.player {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  z-index: 440;
+  height: var(--player-h);
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr) minmax(360px, 2fr) minmax(200px, 1fr);
+  align-items: center;
+  gap: var(--s-6);
+  padding-inline: var(--gutter);
+  background: rgba(9, 10, 20, 0.88);
+  backdrop-filter: blur(26px) saturate(160%);
+  -webkit-backdrop-filter: blur(26px) saturate(160%);
+  border-top: 1px solid var(--line);
+}
+
+.player::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+
+.player__left {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.player__art {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  flex: none;
+  box-shadow: var(--shadow-md);
+}
+
+.player__text {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+}
+
+.player__title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bone);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player__artist {
+  font-size: var(--fs-xs);
+  color: var(--ash);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.player__artist:hover {
+  color: var(--accent);
+}
+
+.player__fav {
+  color: var(--ash-dim);
+  padding: 6px;
+  flex: none;
+  transition:
+    color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease-out);
+}
+
+.player__fav:hover {
+  color: var(--bone);
+}
+
+.player__fav.is-on {
+  color: var(--accent);
+}
+
+.player__fav.is-on:active {
+  transform: scale(1.2);
+}
+
+.player__center {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+}
+
+.player__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.player__source {
+  color: var(--ash-dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 160px;
+}
+
+/* ---------------- Transport ---------------- */
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.transport__side,
+.transport__step {
+  color: var(--ash);
+  padding: 6px;
+  border-radius: var(--r-xs);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.transport__side:hover,
+.transport__step:hover {
+  color: var(--bone);
+}
+
+.transport__side.is-on {
+  color: var(--accent);
+}
+
+.transport__play {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  background: var(--bone);
+  color: var(--ink-000);
+  margin-inline: var(--s-1);
+  transition:
+    transform var(--t-fast) var(--ease-out),
+    background-color var(--t-fast) var(--ease);
+}
+
+.transport__play:hover {
+  transform: scale(1.07);
+  background: #fff;
+}
+
+.transport__play:active {
+  transform: scale(0.96);
+}
+
+.transport--lg .transport__play {
+  width: 66px;
+  height: 66px;
+}
+
+.transport--lg {
+  gap: var(--s-5);
+  justify-content: center;
+}
+
+.transport--lg .transport__side,
+.transport--lg .transport__step {
+  padding: 10px;
+}
+
+/* ---------------- Seek ---------------- */
+
+.seek {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  max-width: 620px;
+}
+
+.seek__time {
+  color: var(--ash-dim);
+  font-size: 0.625rem;
+}
+
+.seek__rail {
+  position: relative;
+  cursor: pointer;
+  touch-action: none;
+  padding-block: 2px;
+}
+
+.seek__head {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.9);
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+  pointer-events: none;
+}
+
+.seek__rail:hover .seek__head,
+.seek__rail:focus-visible .seek__head {
+  opacity: 1;
+}
+
+/* ---------------- Volume ---------------- */
+
+.volume {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.volume__btn {
+  color: var(--ash);
+  transition: color var(--t-fast) var(--ease);
+}
+
+.volume__btn:hover {
+  color: var(--bone);
+}
+
+.volume__range {
+  --fill: 70%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 84px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0%,
+    var(--accent) var(--fill),
+    rgba(239, 235, 227, 0.16) var(--fill),
+    rgba(239, 235, 227, 0.16) 100%
+  );
+  cursor: pointer;
+}
+
+.volume__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bone);
+  border: none;
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+}
+
+.volume:hover .volume__range::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+.volume__range::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bone);
+  border: none;
+}
+
+@media (max-width: 1100px) {
+  .player__source {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .player {
+    display: none;
+  }
+}
+
+/* ---------------- Mobile mini player ---------------- */
+
+.miniplayer {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .miniplayer {
+    position: fixed;
+    bottom: calc(var(--mobilenav-h) + env(safe-area-inset-bottom));
+    inset-inline: var(--s-2);
+    z-index: 410;
+    display: flex;
+    align-items: center;
+    gap: var(--s-2);
+    height: 54px;
+    padding: 0 6px 0 6px;
+    border-radius: var(--r-md);
+    background: rgba(18, 20, 32, 0.94);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+
+  .miniplayer__open {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    min-width: 0;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .miniplayer__art {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    flex: none;
+  }
+
+  .miniplayer__text {
+    display: grid;
+    min-width: 0;
+  }
+
+  .miniplayer__title {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--bone);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .miniplayer__artist {
+    font-size: var(--fs-xs);
+    color: var(--ash);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .miniplayer__fav,
+  .miniplayer__play {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    flex: none;
+    color: var(--bone-dim);
+    border-radius: var(--r-sm);
+  }
+
+  .miniplayer__fav.is-on {
+    color: var(--accent);
+  }
+
+  .miniplayer__play {
+    color: var(--bone);
+  }
+
+  .miniplayer__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--accent);
+    transform-origin: left;
+    transition: transform 140ms linear;
+  }
+}
+
+/* ---------------- Full-screen mobile player ---------------- */
+
+.fullplayer {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: var(--ink-050);
+  overflow: hidden;
+}
+
+.fullplayer__bg {
+  position: absolute;
+  inset: -20%;
+  opacity: 0.5;
+  filter: blur(64px) saturate(160%);
+}
+
+.fullplayer__inner {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto auto auto;
+  gap: var(--s-5);
+  padding: calc(env(safe-area-inset-top) + var(--s-4)) var(--s-6) calc(env(safe-area-inset-bottom) + var(--s-8));
+}
+
+.fullplayer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ash);
+}
+
+.fullplayer__head button {
+  color: var(--bone-dim);
+  padding: 6px;
+}
+
+.fullplayer__art {
+  align-self: center;
+  justify-self: center;
+  width: min(76vw, 340px);
+  aspect-ratio: 1;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+
+.fullplayer__meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.fullplayer__meta h2 {
+  margin-bottom: 4px;
+}
+
+.fullplayer__artist {
+  color: var(--ash);
+  font-size: var(--fs-body);
+}
+
+.fullplayer__fav {
+  color: var(--ash);
+  padding: 6px;
+  flex: none;
+}
+
+.fullplayer__fav.is-on {
+  color: var(--accent);
+}
+
+.fullplayer__album {
+  color: var(--ash-dim);
+  text-align: center;
+}
+
+/* ---------------- Sheet motion ---------------- */
+
+.fullplayer {
+  animation: sheet-up 320ms var(--ease-soft);
+}
+
+.fullplayer.is-closing {
+  animation: sheet-down 280ms var(--ease-soft) forwards;
+}
+
+/* ---------------- Buffering ---------------- */
+
+/* A ring that only appears while the element is actually waiting on data. */
+.transport__play.is-loading::after,
+.miniplayer__play.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: rgba(var(--accent-rgb), 0.35);
+  animation: spin 720ms linear infinite;
+}
+
+.transport__play,
+.miniplayer__play {
+  position: relative;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transport__play.is-loading::after,
+  .miniplayer__play.is-loading::after {
+    animation: none;
+    border-color: var(--accent-line);
+    border-top-color: var(--accent);
+  }
+}
+
+/* ---------------- Playback notice ---------------- */
+
+.notice {
+  position: fixed;
+  z-index: 460;
+  left: 50%;
+  bottom: calc(var(--player-h) + var(--s-4));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  max-width: min(420px, calc(100vw - var(--s-8)));
+  padding: 10px var(--s-3) 10px var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: rgba(18, 20, 32, 0.96);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: var(--shadow-lg);
+  animation: rise 260ms var(--ease-out);
+}
+
+.notice.is-closing {
+  animation: fade-out 200ms var(--ease) forwards;
+}
+
+.notice__mark {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  flex: none;
+}
+
+.notice__text {
+  font-size: var(--fs-sm);
+  color: var(--bone-dim);
+  line-height: 1.4;
+}
+
+.notice__close {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: var(--r-xs);
+  color: var(--ash);
+  transition:
+    color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.notice__close:hover {
+  color: var(--bone);
+  background: rgba(239, 235, 227, 0.07);
+}
+
+@media (max-width: 860px) {
+  .notice {
+    bottom: calc(var(--mobilenav-h) + env(safe-area-inset-bottom) + 54px + var(--s-3));
+    left: var(--s-2);
+    right: var(--s-2);
+    transform: none;
+    max-width: none;
+  }
+}
+
+/* ---------------- Engine badge ---------------- */
+
+/* Says plainly whether you are hearing the real recording or the stand-in. */
+.player__mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-xs);
+  color: var(--ash-dim);
+  white-space: nowrap;
+  flex: none;
+}
+
+.player__mode::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ash-dim);
+}
+
+.player__mode.is-live {
+  color: var(--bone-dim);
+  border-color: var(--accent-line);
+}
+
+.player__mode.is-live::before {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.9);
+}
+
+@media (max-width: 1240px) {
+  .player__mode {
+    display: none;
+  }
+}
+
+/* Repeat has three states but one button, so single-track repeat carries a
+   small numeral. Same mono face as every other label in the transport. */
+.transport__side.is-one {
+  position: relative;
+}
+
+.transport__side.is-one::after {
+  content: '1';
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  line-height: 1;
+  color: var(--accent);
+  background: var(--ink-100);
+  border-radius: 2px;
+  padding: 1px 2px;
+}

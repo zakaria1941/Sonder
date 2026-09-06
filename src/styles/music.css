@@ -1,0 +1,628 @@
+/* ============================================================
+   Track list, cards, grids
+   ============================================================ */
+
+.tracklist {
+  --track-cols: 42px 44px minmax(0, 2.4fr) minmax(0, 1.5fr) 52px 34px 46px 34px;
+}
+
+.tracklist__head,
+.track {
+  display: grid;
+  grid-template-columns: var(--track-cols);
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.tracklist__head {
+  padding: 0 var(--s-3) var(--s-3);
+  color: var(--ash-dim);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-2);
+}
+
+.tracklist__head span:nth-child(5),
+.tracklist__head span:nth-child(7) {
+  text-align: center;
+}
+
+.tracklist__rows {
+  display: grid;
+}
+
+.track {
+  position: relative;
+  padding: 9px var(--s-3);
+  border-radius: var(--r-sm);
+  transition: background-color var(--t-fast) var(--ease);
+}
+
+.track:hover {
+  background: rgba(239, 235, 227, 0.045);
+}
+
+.track.is-current .track__title {
+  color: var(--accent);
+}
+
+.track__index {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  color: var(--ash);
+  position: relative;
+}
+
+.track__num {
+  transition: opacity var(--t-fast) var(--ease);
+}
+
+.track__playicon {
+  position: absolute;
+  opacity: 0;
+  color: var(--bone);
+  transition: opacity var(--t-fast) var(--ease);
+}
+
+.track:hover .track__num {
+  opacity: 0;
+}
+
+.track:hover .track__playicon {
+  opacity: 1;
+}
+
+.track__art {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-xs);
+  overflow: hidden;
+}
+
+.track__main {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+}
+
+.track__title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bone);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track__artist {
+  font-size: var(--fs-xs);
+  color: var(--ash);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-self: start;
+  max-width: 100%;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.track__artist:hover {
+  color: var(--bone-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.track__album {
+  font-size: var(--fs-xs);
+  color: var(--ash);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track__energy {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(239, 235, 227, 0.12);
+  overflow: hidden;
+}
+
+.track__energybar {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  opacity: 0.75;
+}
+
+.track__fav,
+.track__more {
+  color: var(--ash-dim);
+  display: grid;
+  place-items: center;
+  height: 30px;
+  opacity: 0;
+  transition:
+    opacity var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.track__fav.is-on {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.track:hover .track__fav,
+.track:hover .track__more,
+.track:focus-within .track__fav,
+.track:focus-within .track__more {
+  opacity: 1;
+}
+
+.track__fav:hover,
+.track__more:hover {
+  color: var(--bone);
+}
+
+.track__time {
+  color: var(--ash);
+  text-align: right;
+}
+
+/* Compact variant — assistant panel and narrow columns */
+
+.tracklist--compact {
+  --track-cols: 28px 38px minmax(0, 1fr) 30px 42px 26px;
+}
+
+/* Titles need the width more than the energy meter does in a side panel. */
+.tracklist--compact .track__energy {
+  display: none;
+}
+
+.track--compact {
+  padding: 6px var(--s-2);
+  gap: var(--s-2);
+}
+
+.track--compact .track__art {
+  width: 38px;
+  height: 38px;
+}
+
+.track--compact .track__fav,
+.track--compact .track__more {
+  opacity: 1;
+}
+
+@media (max-width: 1080px) {
+  .tracklist {
+    --track-cols: 38px 44px minmax(0, 1fr) 52px 34px 44px 32px;
+  }
+  .tracklist__head span:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .tracklist {
+    --track-cols: 30px 46px minmax(0, 1fr) 34px 42px;
+  }
+  .tracklist__head {
+    display: none;
+  }
+  .track__energy,
+  .track__more {
+    display: none;
+  }
+  .track__fav {
+    opacity: 1;
+  }
+  .track {
+    padding: 8px 6px;
+  }
+  .track__art {
+    width: 46px;
+    height: 46px;
+  }
+  .tracklist--compact {
+    --track-cols: 26px 38px minmax(0, 1fr) 30px 26px;
+  }
+  .tracklist--compact .track__time {
+    display: none;
+  }
+}
+
+/* ---------------- Playlist card ---------------- */
+
+.pcard {
+  --card-hue: var(--accent);
+  position: relative;
+  width: 100%;
+}
+
+.pcard--md {
+  width: 268px;
+}
+
+.pcard__link {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.pcard__art {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition:
+    transform var(--t-base) var(--ease-out),
+    box-shadow var(--t-base) var(--ease);
+}
+
+.pcard:hover .pcard__art {
+  transform: translateY(-4px);
+  box-shadow:
+    0 28px 60px -24px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(var(--accent-rgb), 0.18);
+}
+
+.pcard__badge {
+  position: absolute;
+  left: var(--s-3);
+  top: var(--s-3);
+  padding: 4px 8px;
+  border-radius: var(--r-xs);
+  background: rgba(4, 5, 10, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--bone-dim);
+  font-size: 0.625rem;
+}
+
+.pcard__text {
+  display: grid;
+  gap: 3px;
+}
+
+.pcard__title {
+  font-size: 1.125rem;
+  transition: color var(--t-fast) var(--ease);
+}
+
+.pcard:hover .pcard__title {
+  color: var(--card-hue);
+}
+
+.pcard__sub {
+  font-size: var(--fs-xs);
+  color: var(--ash);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pcard__meta {
+  color: var(--ash-dim);
+  margin-top: 2px;
+}
+
+.pcard__play {
+  position: absolute;
+  right: var(--s-3);
+  top: var(--s-3);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  background: var(--card-hue);
+  color: var(--ink-000);
+  opacity: 0;
+  transform: translateY(6px) scale(0.9);
+  transition:
+    opacity var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease-out);
+  box-shadow: var(--shadow-md);
+}
+
+.pcard:hover .pcard__play,
+.pcard__play.is-playing,
+.pcard:focus-within .pcard__play {
+  opacity: 1;
+  transform: none;
+}
+
+.pcard__play:hover {
+  transform: scale(1.07);
+}
+
+/* ---------------- Collection card ---------------- */
+
+.ccard {
+  --card-hue: var(--accent);
+  position: relative;
+  display: block;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line);
+  transition:
+    border-color var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease-out);
+}
+
+.ccard:hover {
+  border-color: rgba(var(--accent-rgb), 0.22);
+  transform: translateY(-3px);
+}
+
+.ccard--wide {
+  aspect-ratio: 16 / 11;
+  height: 100%;
+}
+
+.ccard__art {
+  position: absolute;
+  inset: 0;
+  transition: transform 1200ms var(--ease-out);
+}
+
+.ccard:hover .ccard__art {
+  transform: scale(1.045);
+}
+
+.ccard__body {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: var(--s-6);
+}
+
+.ccard__tagline {
+  color: var(--card-hue);
+  letter-spacing: 0.18em;
+}
+
+.ccard__title {
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-variation-settings:
+    'wdth' 114,
+    'wght' 660;
+}
+
+.ccard--wide .ccard__title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.ccard__desc {
+  font-size: var(--fs-sm);
+  color: var(--bone-dim);
+  max-width: 38ch;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease-out);
+}
+
+.ccard:hover .ccard__desc {
+  opacity: 1;
+  transform: none;
+}
+
+.ccard__go {
+  position: absolute;
+  top: var(--s-5);
+  right: var(--s-5);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  color: var(--bone-dim);
+  transition:
+    background-color var(--t-base) var(--ease),
+    color var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
+}
+
+.ccard:hover .ccard__go {
+  background: var(--card-hue);
+  border-color: var(--card-hue);
+  color: var(--ink-000);
+}
+
+@media (hover: none) {
+  .ccard__desc {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------- Mood card ---------------- */
+
+.moodgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--s-3);
+}
+
+.moodgrid--compact {
+  grid-template-columns: repeat(auto-fill, minmax(158px, 1fr));
+  gap: var(--s-2);
+}
+
+@media (max-width: 560px) {
+  .moodgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.moodcard {
+  --card-hue: var(--accent);
+  position: relative;
+  display: grid;
+  /* art / text / energy bar — the bar stays pinned however the blurb wraps */
+  grid-template-rows: auto 1fr auto;
+  gap: var(--s-3);
+  width: 100%;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  text-align: left;
+  overflow: hidden;
+  background: rgba(239, 235, 227, 0.014);
+  transition:
+    border-color var(--t-base) var(--ease),
+    background-color var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease-out);
+}
+
+.moodcard:hover {
+  border-color: rgba(var(--accent-rgb), 0.28);
+  transform: translateY(-2px);
+}
+
+.moodcard.is-selected {
+  border-color: var(--card-hue);
+  background: color-mix(in srgb, var(--card-hue) 12%, transparent);
+}
+
+.moodcard.is-selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--card-hue);
+  pointer-events: none;
+}
+
+.moodcard__art {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+.moodcard__text {
+  display: grid;
+  gap: 2px;
+  padding-inline: 2px;
+}
+
+.moodcard__name {
+  font-family: var(--font-display);
+  font-variation-settings:
+    'wdth' 112,
+    'wght' 620;
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+  color: var(--bone);
+}
+
+.moodcard__blurb {
+  font-size: var(--fs-xs);
+  color: var(--ash);
+  line-height: 1.4;
+}
+
+.moodcard__energy {
+  height: 2px;
+  margin: 0 2px 2px;
+  border-radius: 2px;
+  background: rgba(239, 235, 227, 0.1);
+  overflow: hidden;
+}
+
+.moodcard__energy span {
+  display: block;
+  height: 100%;
+  background: var(--card-hue);
+  transform-origin: left;
+}
+
+.moodgrid--compact .moodcard {
+  padding: var(--s-2);
+  gap: var(--s-2);
+}
+
+.moodgrid--compact .moodcard__art {
+  aspect-ratio: 16 / 9;
+}
+
+.moodgrid--compact .moodcard__name {
+  font-size: 0.9375rem;
+}
+
+.moodgrid--compact .moodcard__blurb {
+  display: none;
+}
+
+/* ---------------- Artist cards ---------------- */
+
+.artistgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--s-4);
+}
+
+.artistgrid--small {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--s-3);
+}
+
+.artistcard {
+  --card-hue: var(--accent);
+  display: grid;
+  gap: var(--s-2);
+  text-align: center;
+  justify-items: center;
+}
+
+.artistcard__art {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  transition:
+    transform var(--t-base) var(--ease-out),
+    box-shadow var(--t-base) var(--ease);
+}
+
+.artistcard:hover .artistcard__art {
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 40px -18px rgba(0, 0, 0, 0.9),
+    0 0 0 1px var(--card-hue);
+}
+
+.artistcard__name {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--bone);
+}
+
+.artistcard__meta {
+  color: var(--ash-dim);
+}
+
+/* ---------------- Chip wraps ---------------- */
+
+.chipwrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.chipwrap--tight {
+  gap: 6px;
+}

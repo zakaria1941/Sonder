@@ -1,0 +1,66 @@
+/* ============================================================
+   Discover
+   ============================================================ */
+
+.dischead {
+  position: relative;
+  padding-top: calc(var(--nav-h) + clamp(48px, 9vw, 110px));
+  padding-bottom: clamp(48px, 8vw, 96px);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  background: radial-gradient(90% 120% at 20% 0%, var(--accent-soft) 0%, transparent 56%);
+}
+
+.dischead__inner {
+  display: grid;
+  gap: var(--s-4);
+  justify-items: start;
+  max-width: 68ch;
+}
+
+.dischead__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.dischead__signal {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -10px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.discover__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: var(--s-4);
+}
+
+@media (max-width: 560px) {
+  .discover__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-3);
+  }
+  .discover__grid .ccard__body {
+    padding: var(--s-4);
+  }
+  .discover__grid .ccard__desc {
+    display: none;
+  }
+  .discover__grid .ccard__go {
+    display: none;
+  }
+  /* Two-up cards are too narrow for a wrapping tagline. */
+  .discover__grid .ccard__tagline {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .discover__grid .ccard__title {
+    font-size: 1.25rem;
+  }
+}
