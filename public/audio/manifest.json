@@ -190,5 +190,13 @@
     "bpm": 146,
     "energy": 99,
     "valence": 44
+  },
+  {
+    "slug": "panam",
+    "title": "panam",
+    "duration": 48,
+    "bpm": 150,
+    "energy": 100,
+    "valence": 40
   }
 ]
