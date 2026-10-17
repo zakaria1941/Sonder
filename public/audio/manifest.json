@@ -198,5 +198,45 @@
     "bpm": 150,
     "energy": 100,
     "valence": 40
+  },
+  {
+    "slug": "homewrecker",
+    "title": "Homewrecker",
+    "duration": 234,
+    "bpm": 110,
+    "energy": 62,
+    "valence": 38
+  },
+  {
+    "slug": "irie-vibe",
+    "title": "Irie Vibe",
+    "duration": 241,
+    "bpm": 90,
+    "energy": 55,
+    "valence": 78
+  },
+  {
+    "slug": "ride-or-die",
+    "title": "Ride Or Die",
+    "duration": 203,
+    "bpm": 100,
+    "energy": 68,
+    "valence": 32
+  },
+  {
+    "slug": "en-chantier",
+    "title": "En Chantier",
+    "duration": 181,
+    "bpm": 120,
+    "energy": 80,
+    "valence": 52
+  },
+  {
+    "slug": "strangers",
+    "title": "Strangers",
+    "duration": 226,
+    "bpm": 118,
+    "energy": 72,
+    "valence": 70
   }
 ]
